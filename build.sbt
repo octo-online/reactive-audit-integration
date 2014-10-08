@@ -74,6 +74,13 @@ audit := {
 //}.taskValue
 
 
+lazy val specificRun= taskKey[Unit]("...")
+
+specificRun := {
+  println("HELLO Specific run")
+}
+
+fullRunTask(specificRun, Runtime, "toto.Main")
 
 //fullRunTask(audit, Runtime, "com.octo.reactive.sample.TestApp")
 

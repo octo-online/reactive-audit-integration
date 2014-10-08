@@ -16,8 +16,8 @@
 
 package com.octo.reactive.sample;
 
-import com.octo.reactive.audit.lib.AssumeLatency;
 import com.octo.reactive.audit.lib.Latency;
+import com.octo.reactive.audit.lib.TolerateLatency;
 import com.octo.reactive.audit.lib.WithLatency;
 
 /**
@@ -32,7 +32,7 @@ public class TestApp
         for (int i=0;i<10000;++i) ;
     }
 
-    @AssumeLatency
+    @TolerateLatency
     public static void assumeLatency() throws InterruptedException
     {
         Thread.sleep(20L); // Call a tolarable method with latency
