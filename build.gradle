@@ -61,7 +61,7 @@ task(audit, dependsOn: 'classes', type: JavaExec) {
     jvmArgs = [
             "-javaagent:${aspectjWeaverJar}",
             "-Djava.ext.dirs=" + System.env.'JAVA_HOME' + "/ext${File.pathSeparator}${auditLibs}",
-            "-DreactiveAudit.logOutput=${auditDir}/reactive-audit.log",
+            "-DreactiveAudit_logOutput=${auditDir}/reactive-audit.log",
             // If you use a framework from a distribution artifact
             //"-DreactiveAudit=${agentConf}!/reactive-audit-agent/etc/${framework}.properties"
             // else, use a specific properties file
