@@ -1,4 +1,4 @@
-import java.text.AttributedString
+
 
 name := "integration"
 
@@ -45,9 +45,9 @@ fork in audit := true
 prepareAudit := {
   println("PREPARE AUDIT")
   val auditAgent = ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit-agent"))).head.data
-  val targetAgent= target.value / "reactive-audit-libs" / "reactivte-audit-agent.jar"
+  val targetAgent= target.value / "reactive-audit-libs" / "reactive-audit-agent.jar"
   val auditLib   = ((fullClasspath in Runtime value) filter (_.data.getName.startsWith("reactive-audit-lib"))).head.data
-  val targetLib  = target.value / "reactive-audit-libs" / "reactivte-audit-lib.jar"
+  val targetLib  = target.value / "reactive-audit-libs" / "reactive-audit-lib.jar"
   IO.copyFile(auditLib,targetLib)
   IO.copyFile(auditAgent,targetAgent)
 }

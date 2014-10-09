@@ -11,6 +11,3 @@ Execute
 Execute
     gradle audit
     
-# SBT
-Execute
-    sbt compile // FIXME
