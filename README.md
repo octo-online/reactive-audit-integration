@@ -1,13 +1,13 @@
 # Introduction
-Sample project to invoke reactive-audit with
+Sample project to invoke [reactive-audit](https://github.com/octo-online/reactive-audit) directly with
 * Maven
 * Gradle
 
 # Maven
-Execute
+Execute and see `target/reactive-audit-output/audit.log`
     mvn install
     
 # Gradle
-Execute
+Execute and see `build/reports/audit/reactive-audit.log`
     gradle audit
     
