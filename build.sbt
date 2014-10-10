@@ -15,73 +15,60 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 // for debugging sbt problems
 //logLevel := Level.Debug
 
+classpathTypes += "zip"
+
 libraryDependencies ++= Seq(
   "com.octo.reactive.audit" % "reactive-audit-lib" % "0.7",
   "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7" % "test",
+  "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7.zip" % "test",
   "org.aspectj" % "aspectjweaver" % "1.8.2" % "test")
 
-lazy val weaver = taskKey[String]("The aspectjwearver jar file.")
-lazy val auditLib = taskKey[File]("The audit-reactive-lib jar file.")
-//lazy val auditAgent = taskKey[String]("The audit-reactive-agent jar file.")
-lazy val audit= taskKey[Unit]("Audit with reactive-audit.")
-lazy val prepareAudit= taskKey[Unit]("Audit with reactive-audit.")
 
-weaver     := ((fullClasspath in Test value) filter (_.data.getName.startsWith("aspectjweaver"))).head.data.getAbsolutePath
-
-auditLib   := ((fullClasspath in Runtime value) filter (_.data.getName.startsWith("reactive-audit-lib"))).head.data
-//auditAgent := ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit-agent"))).head.data.getAbsolutePath
+framework in audit:= "play"
 
 
-javaOptions in audit += "-javaagent:"+weaver.value
+val framework = settingKey[String]("The framework to use with reactive-audit.")
 
-//mainClass  := Some("com.octo.reactive.sample.TestApp")
+val reactiveaudit = settingKey[String]("The reactive-audit zip file.")
+
+//reactiveaudit := ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit") && _.data.getName.endWith("zip"))).head.data
+
+lazy val audit = config("audit") extend Runtime
+
+inConfig(audit)(Defaults.configSettings)
+
+sourceDirectory in audit <<= sourceDirectory in Compile
+
+ivyConfigurations += audit
 
 fork in audit := true
 
-
-//def makeSomeResources(base: File): Seq[File] {
-//  Seq.empty
-//}
-prepareAudit := {
-  println("PREPARE AUDIT")
-  val auditAgent = ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit-agent"))).head.data
-  val targetAgent= target.value / "reactive-audit-libs" / "reactive-audit-agent.jar"
-  val auditLib   = ((fullClasspath in Runtime value) filter (_.data.getName.startsWith("reactive-audit-lib"))).head.data
-  val targetLib  = target.value / "reactive-audit-libs" / "reactive-audit-lib.jar"
-  IO.copyFile(auditLib,targetLib)
-  IO.copyFile(auditAgent,targetAgent)
-}
-
-audit := {
-  println("AUDIT")
-  // Dependencies
-  prepareAudit.value
-  //(resourceGenerators in Test).value
-  val result=(run in Compile).value
-  println("RESULT="+result)
-  val t=fullRunTask(audit, Runtime, "com.octo.reactive.sample.TestApp")
-  println("t="+t)
-//  val r = (runner in Compile).value
-//  val input = name.value // or any other string setting(s)
-//  val cp = (fullClasspath in Compile).value
-  //toError(r.run("com.octo.reactive.sample.TestApp", data(cp), Seq(input), streams.value.log))
-}
-
-//resourceGenerators in Test += Def.task {
-//  println("RESSOURCE GEN")
-//  val file = (sourceManaged in Compile).value / "demo" / "Test.scala"
-//  Seq(target.value / "reactive-audit-lib" / "reactivte-audit.jar")
-//}.taskValue
+resourceGenerators in audit += Def.task {
+  val targetLibs   = target.value / "reactive-audit-libs"
+  IO.copyFile(
+    ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit-agent"))).head.data,
+    targetLibs / "reactive-audit-agent.jar")
+  IO.copyFile(
+    ((fullClasspath in Runtime value) filter (_.data.getName.startsWith("reactive-audit-lib"))).head.data,
+    targetLibs / "reactive-audit-lib.jar")
+  IO.copyFile(
+    ((fullClasspath in Test value) filter (_.data.getName.startsWith("aspectjweaver"))).head.data,
+    targetLibs / "aspecjweaver.jar")
+  file(target.value+ "/reports/audit").mkdirs()
+  Seq[File]()
+}.taskValue
 
 
-lazy val specificRun= taskKey[Unit]("...")
+javaOptions in audit += "-javaagent:"+((fullClasspath in Test value) filter (_.data.getName.startsWith("aspectjweaver"))).head.data.getAbsolutePath
 
-specificRun := {
-  println("HELLO Specific run")
-}
+javaOptions in audit += "-Djava.ext.dirs=."+System.getenv("JAVA_HOME") + "/ext/lib" +
+  java.io.File.pathSeparator + target.value / "reactive-audit-libs/"
 
-fullRunTask(specificRun, Runtime, "toto.Main")
+javaOptions in audit += "-DreactiveAudit_logOutput="+target.value / "reports" / "audit" / "reactive-audit.log"
 
-//fullRunTask(audit, Runtime, "com.octo.reactive.sample.TestApp")
+//"-DreactiveAudit=${agentConf}!/reactive-audit-agent/etc/${framework}.properties"
+//javaOptions in audit += "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
 
+javaOptions in audit += "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
 
+addCommandAlias("audit", "audit:run")
