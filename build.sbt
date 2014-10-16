@@ -8,7 +8,7 @@ publishMavenStyle := true
 
 resolvers += Resolver.mavenLocal
 
-resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/comoctoreactive-1015"
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/comoctoreactive-1022"
 
 //resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
@@ -22,6 +22,10 @@ libraryDependencies ++= Seq(
   "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7" % "test",
   "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7.zip" % "test",
   "org.aspectj" % "aspectjweaver" % "1.8.2" % "test")
+
+
+// https://stackoverflow.com/questions/26301364/how-to-declare-zip-dependency-and-know-its-path-in-file-system/26308329#26308329
+//libraryDependencies += "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7" from "https://oss.sonatype.org/content/groups/staging/com/octo/reactive/audit/reactive-audit-agent/0.7/reactive-audit-agent-0.7.zip"
 
 
 framework in audit:= "play"

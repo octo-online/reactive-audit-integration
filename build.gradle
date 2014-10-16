@@ -32,12 +32,10 @@ description = 'Reactive Audit Tool Integration Test Application'
 
 dependencies {
     compile     "com.octo.reactive.audit:reactive-audit-lib:${reactiveAuditVersion}"
-    testRuntime "com.octo.reactive.audit:reactive-audit-agent:${reactiveAuditVersion}"
     testRuntime "org.aspectj:aspectjweaver:${aspectjVersion}"
+    testRuntime "com.octo.reactive.audit:reactive-audit-agent:${reactiveAuditVersion}"
+    testRuntime "com.octo.reactive.audit:reactive-audit-agent:${reactiveAuditVersion}@zip"
 }
-
-// https://stackoverflow.com/questions/26301364/how-to-declare-zip-dependency-and-know-its-path-in-file-system/26308329#26308329
-//libraryDependencies += "com.octo.reactive.audit" % "reactive-audit-agent" % reactiveAuditVersion.value from "https://oss.sonatype.org/content/groups/staging/reactive-audit-agent.zip"
 
 task(audit, dependsOn: 'classes', type: JavaExec) {
 
@@ -52,12 +50,6 @@ task(audit, dependsOn: 'classes', type: JavaExec) {
     def aspectjWeaverJar = project.configurations.testRuntime.find { it.name.startsWith("aspectjweaver-") }
     def agentJar = project.configurations.testRuntime.find { it.name.startsWith("reactive-audit-agent-${reactiveAuditVersion}.jar") }
     def agentConf = "jar:"+file(project.configurations.testRuntime.find { it.name.startsWith("reactive-audit-agent-${reactiveAuditVersion}.zip") }).toURI()
-
-    val jar = (update in Compile).value
-            .select(configurationFilter("compile"))
-            .filter(_.name.contains("reactive-audit-agent"))
-            .head
-    println("JAR="+jar)
 
     copy {
         from aspectjWeaverJar
@@ -76,4 +68,3 @@ task(audit, dependsOn: 'classes', type: JavaExec) {
             "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
         ]
 }
-
