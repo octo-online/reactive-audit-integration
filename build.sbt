@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
 //libraryDependencies += "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7" from "https://oss.sonatype.org/content/groups/staging/com/octo/reactive/audit/reactive-audit-agent/0.7/reactive-audit-agent-0.7.zip"
 
 
-framework in audit:= "play"
+framework in Audit:= "play"
 
 
 val framework = settingKey[String]("The framework to use with reactive-audit.")
@@ -37,17 +37,22 @@ val reactiveaudit = settingKey[String]("The reactive-audit zip file.")
 
 //reactiveaudit := ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit") && _.data.getName.endWith("zip"))).head.data
 
-lazy val audit = config("audit") extend Runtime
+lazy val Audit = config("audit") extend Runtime
 
-inConfig(audit)(Defaults.configSettings)
+inConfig(Audit)(Defaults.configSettings)
 
-sourceDirectory in audit <<= sourceDirectory in Compile
+mainClass in (Compile) := Some("com.octo.reactive.sample.TestApp")
 
-ivyConfigurations += audit
+mainClass in (Audit) := Some("com.octo.reactive.sample.TestApp")
 
-fork in audit := true
 
-resourceGenerators in audit += Def.task {
+sourceDirectory in Audit <<= sourceDirectory in Compile
+
+ivyConfigurations += Audit
+
+fork in Audit := true
+
+resourceGenerators in Audit += Def.task {
   val targetLibs   = target.value / "reactive-audit-libs"
   IO.copyFile(
     ((fullClasspath in Test value) filter (_.data.getName.startsWith("reactive-audit-agent"))).head.data,
@@ -63,16 +68,16 @@ resourceGenerators in audit += Def.task {
 }.taskValue
 
 
-javaOptions in audit += "-javaagent:"+((fullClasspath in Test value) filter (_.data.getName.startsWith("aspectjweaver"))).head.data.getAbsolutePath
+javaOptions in Audit += "-javaagent:"+((fullClasspath in Test value) filter (_.data.getName.startsWith("aspectjweaver"))).head.data.getAbsolutePath
 
-javaOptions in audit += "-Djava.ext.dirs=."+System.getenv("JAVA_HOME") + "/ext/lib" +
+javaOptions in Audit += "-Djava.ext.dirs=."+System.getenv("JAVA_HOME") + "/ext/lib" +
   java.io.File.pathSeparator + target.value / "reactive-audit-libs/"
 
-javaOptions in audit += "-DreactiveAudit_logOutput="+target.value / "reports" / "audit" / "reactive-audit.log"
+javaOptions in Audit += "-DreactiveAudit_logOutput="+target.value / "reports" / "audit" / "reactive-audit.log"
 
 //"-DreactiveAudit=${agentConf}!/reactive-audit-agent/etc/${framework}.properties"
 //javaOptions in audit += "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
 
-javaOptions in audit += "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
+javaOptions in Audit += "-DreactiveAudit=src/test/resources/reactiveAudit.properties"
 
 addCommandAlias("audit", "audit:run")
