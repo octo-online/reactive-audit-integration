@@ -4,10 +4,10 @@ Sample project to invoke [reactive-audit](https://github.com/octo-online/reactiv
 * Maven
 * Gradle
 
-Builder| Command
-:-- | ---
-Maven | $ mvn install
-Gradle | $ gradle audit
-SBT | $ sbt audit
+Builder| Run | Audit
+:-- | ---| ---
+Maven | $ mvn install | mvn install
+Gradle | $ gradle run | $ gradle audit
+SBT | $ sbt run | $ sbt audit
 
     
