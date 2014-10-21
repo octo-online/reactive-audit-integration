@@ -191,7 +191,11 @@
                             <workingDirectory>${project.build.directory}</workingDirectory>
                             <arguments>
                                 <argument>-DreactiveAudit=${project.build.testOutputDirectory}/reactiveAudit.properties</argument>
-                                <argument>-DreactiveAudit_logOutput=${reactive-audit-output-dir}/audit.log</argument>
+<!--                                 <argument>-DreactiveAudit_logOutput=${reactive-audit-output-dir}/audit.log</argument> -->
+                                <argument>-DreactiveAudit_logOutput=console</argument>
+                                
+                                <argument>-DreactiveAudit_debug=true</argument>
+                                
                                 <argument>-javaagent:${aspectjweaver.artifact.path}</argument>
                                 <argument>-Djava.ext.dirs=${java-ext-dir};${reactive-audit-lib-home}</argument>
                                 <argument>-jar</argument>
