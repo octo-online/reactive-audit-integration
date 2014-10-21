@@ -19,12 +19,9 @@ apply plugin:'application'
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/groups/staging"
-    }
-    maven { // FIXME : remove en release
-        url "https://oss.sonatype.org/content/repositories/comoctoreactive-1022"
-    }
+//    maven {
+//        url "https://oss.sonatype.org/content/groups/public"
+//    }
 }
 
 defaultTasks 'audit'
