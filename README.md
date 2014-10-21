@@ -6,7 +6,7 @@ Sample project to invoke [reactive-audit](https://github.com/octo-online/reactiv
 
 Builder| Run | Audit
 :-- | ---| ---
-Maven | $ mvn exec:java -Prun | mvn integration-test -Paudit
+Maven | $ mvn exec:java -Prun | $ mvn integration-test -Paudit
 Gradle | $ gradle run | $ gradle audit
 SBT | $ sbt run | $ sbt audit
 
