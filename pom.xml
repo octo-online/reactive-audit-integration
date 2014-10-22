@@ -181,10 +181,10 @@
                             <execution>
                                 <phase>pre-integration-test</phase>
                                 <configuration>
-                                    <tasks>
+                                    <target>
                                         <echo message="Creating output folder for reactive audit..." />
                                         <mkdir dir="${reactive-audit-output-dir}" />
-                                    </tasks>
+                                    </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
@@ -211,7 +211,7 @@
                             <workingDirectory>${project.build.directory}</workingDirectory>
                             <arguments>
                                 <argument>-DreactiveAudit=${project.build.testOutputDirectory}/reactiveAudit.properties</argument>
-                                <argument>-DreactiveAudit_logOutput="${reactive-audit-output-dir}/audit.log"</argument>
+                                <argument>-DreactiveAudit_logOutput=${reactive-audit-output-dir}/audit.log</argument>
                                 
                                 <argument>-DreactiveAudit_debug=true</argument>
                                 
