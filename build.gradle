@@ -29,7 +29,7 @@ defaultTasks 'audit'
 mainClassName = "com.octo.reactive.sample.TestApp"
 
 ext.aspectjVersion = '1.8.2'
-ext.reactiveAuditVersion = '0.7'
+ext.reactiveAuditVersion = '0.7.1'
 
 apply plugin: 'java'
 
