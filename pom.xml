@@ -230,11 +230,25 @@
     <repositories>
         <repository>
             <id>Sonatype-staging-repository</id>
-            <name>Sonatype's Staging Maven repository</name>
+            <name>Sonatype's Staging Maven Repository</name>
             <url>https://oss.sonatype.org/content/groups/staging</url>
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>Sonatype-snapshots-repository</id>
+            <name>Sonatype's Snapshots Maven Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 </project>
