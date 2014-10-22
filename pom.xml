@@ -220,7 +220,7 @@
                                 <argument>-jar</argument>
                                 <argument>${project.artifact.filename}</argument>
                             </arguments>
-                            <outputFile>${reactive-audit-output-dir}/reactiveAuditConsole.log</outputFile>
+                            <!-- <outputFile>${reactive-audit-output-dir}/reactiveAuditConsole.log</outputFile> -->
                         </configuration>
                     </plugin>
                 </plugins>
