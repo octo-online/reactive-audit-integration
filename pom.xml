@@ -22,7 +22,7 @@
     <name>Reactive Audit Tool Integration Test Application</name>
 
     <properties>
-        <reactive.audit.agent.version.string>[0.0.4,)</reactive.audit.agent.version.string>
+        <reactive.audit.agent.version.string>0.7</reactive.audit.agent.version.string>
         <aspectjweaver.version>1.8.2</aspectjweaver.version>
     </properties>
 
@@ -235,6 +235,9 @@
             <releases>
                 <updatePolicy>always</updatePolicy>
             </releases>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 </project>
