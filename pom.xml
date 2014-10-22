@@ -217,7 +217,7 @@
                                 <argument>-DreactiveAudit_debug=true</argument>
                                 
                                 <argument>-javaagent:${aspectjweaver.artifact.path}</argument>
-                                <argument>-Djava.ext.dirs=${java-ext-dir};${reactive-audit-lib-home}</argument>
+                                <argument>-Djava.ext.dirs=${java-ext-dir}${path.separator}${reactive-audit-lib-home}</argument>
                                 <argument>-jar</argument>
                                 <argument>${project.artifact.filename}</argument>
                             </arguments>
