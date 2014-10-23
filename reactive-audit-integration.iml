@@ -14,11 +14,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: reactive-audit-lib-0.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: aspectjweaver-1.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: aspectjrt-1.8.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: reactive-audit-lib-0.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7.1" level="project" />
   </component>
 </module>
 
