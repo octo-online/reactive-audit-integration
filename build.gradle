@@ -19,9 +19,13 @@ apply plugin:'application'
 repositories {
     mavenLocal()
     mavenCentral()
-//    maven {
-//        url "https://oss.sonatype.org/content/groups/public"
-//    }
+/*    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }*/
+    maven {
+        //url "https://oss.sonatype.org/content/groups/staging"
+        url "https://oss.sonatype.org/content/repositories/comoctoreactive-1029"
+    }
 }
 
 defaultTasks 'audit'
@@ -29,7 +33,7 @@ defaultTasks 'audit'
 mainClassName = "com.octo.reactive.sample.TestApp"
 
 ext.aspectjVersion = '1.8.2'
-ext.reactiveAuditVersion = '0.7.1'
+ext.reactiveAuditVersion = '0.8'
 
 apply plugin: 'java'
 

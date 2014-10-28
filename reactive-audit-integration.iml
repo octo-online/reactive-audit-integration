@@ -19,6 +19,7 @@
     <orderEntry type="library" exported="" name="Gradle: reactive-audit-lib-0.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: reactive-audit-agent-0.7.1" level="project" />
+    <orderEntry type="module" module-name="reactive-audit-lib" />
   </component>
 </module>
 

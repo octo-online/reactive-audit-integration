@@ -2,7 +2,7 @@
 
 name := "integration"
 
-version := "0.7.1"
+version := "0.8"
 
 publishMavenStyle := true
 
@@ -18,14 +18,14 @@ resolvers += Resolver.mavenLocal
 classpathTypes += "zip"
 
 libraryDependencies ++= Seq(
-  "com.octo.reactive.audit" % "reactive-audit-lib" % "0.7.1",
-  "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7.1" % "test",
-  "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7.1.zip" % "test",
+  "com.octo.reactive.audit" % "reactive-audit-lib" % "0.8",
+  "com.octo.reactive.audit" % "reactive-audit-agent" % "0.8" % "test",
+  "com.octo.reactive.audit" % "reactive-audit-agent" % "0.8.zip" % "test",
   "org.aspectj" % "aspectjweaver" % "1.8.2" % "test")
 
 
 // https://stackoverflow.com/questions/26301364/how-to-declare-zip-dependency-and-know-its-path-in-file-system/26308329#26308329
-//libraryDependencies += "com.octo.reactive.audit" % "reactive-audit-agent" % "0.7.1" from "https://oss.sonatype.org/content/groups/staging/com/octo/reactive/audit/reactive-audit-agent/0.7.1/reactive-audit-agent-0.7.1.zip"
+//libraryDependencies += "com.octo.reactive.audit" % "reactive-audit-agent" % "0.8" from "https://oss.sonatype.org/content/groups/staging/com/octo/reactive/audit/reactive-audit-agent/0.8/reactive-audit-agent-0.8.zip"
 
 
 framework in Audit:= "play"

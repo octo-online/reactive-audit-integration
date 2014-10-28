@@ -17,6 +17,7 @@
 package com.octo.reactive.sample;
 
 import com.octo.reactive.audit.lib.Latency;
+import com.octo.reactive.audit.lib.StartAudit;
 import com.octo.reactive.audit.lib.TolerateLatency;
 import com.octo.reactive.audit.lib.WithLatency;
 
@@ -38,14 +39,14 @@ public class TestApp
         Thread.sleep(20L); // Call a tolarable method with latency
     }
 
-	// TODO @StartAudit
+	@StartAudit // Optional. It is to declare when the audit is started.
 	public static void main(String[] args)
 			throws InterruptedException
 	{
 		System.out.println("Reactive test application is running...");
-		Thread.sleep(200L);
-        withLatency();
-        assumeLatency();
+		Thread.sleep(200L);		// Generate alert
+        withLatency();			// Generate alert
+        assumeLatency();		// No alert
 		System.out.println("...and now stopped.");
 	}
 }
