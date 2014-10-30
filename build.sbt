@@ -8,9 +8,7 @@ publishMavenStyle := true
 
 resolvers += Resolver.mavenLocal
 
-//resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/comoctoreactive-1022"
-
-//resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/groups/staging"
 
 // for debugging sbt problems
 //logLevel := Level.Debug
