@@ -19,12 +19,11 @@ apply plugin:'application'
 repositories {
     mavenLocal()
     mavenCentral()
-/*    maven {
-        url "https://oss.sonatype.org/content/groups/public"
-    }*/
     maven {
-        //url "https://oss.sonatype.org/content/groups/staging"
-        url "https://oss.sonatype.org/content/repositories/comoctoreactive-1029"
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
     }
 }
 
