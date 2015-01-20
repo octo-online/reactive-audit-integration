@@ -23,7 +23,7 @@ public class TestAppIT {
     private static final Pattern LINE_HEADER_PATTERN = Pattern.compile("\\Qinfo   : Use reactive audit with \\E.*\\Q at \\E\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
     private static final String LINE_HEADER_REPLACEMENT = "<<SKIPPED>>";
     private static final Pattern CRLF_PATTERN = Pattern.compile("(\r\n|\n)");
-    private static final String CRLF_REPLACEMENT = "\n";
+    private static final String CRLF_REPLACEMENT = "";
 
     @Test
     public void testAuditOutput() throws IOException {
