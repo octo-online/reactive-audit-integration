@@ -1,0 +1,19 @@
+info   : Use reactive audit with C:\Work\git\reactive\audit-reactive\reactive-audit-integration\target\test-classes/reactiveAudit.properties at 16:11:03 CET 2015
+high   : Call method void java.lang.Thread.sleep(long)
+com.octo.reactive.audit.lib.CPUReactiveAuditException: Call method void java.lang.Thread.sleep(long)
+	at thread "main"
+	at com.octo.reactive.sample.TestApp.main(TestApp.java:47)
+
+medium : Call method void com.octo.reactive.sample.TestApp.withLatency()
+com.octo.reactive.audit.lib.CPUReactiveAuditException: Call method void com.octo.reactive.sample.TestApp.withLatency()
+	at thread "main"
+	at com.octo.reactive.sample.TestApp.withLatency(TestApp.java:33)
+	at com.octo.reactive.sample.TestApp.main(TestApp.java:48)
+
+info   : 
+	Total high      =1
+	Total medium    =1
+	Total low       =0
+	Max. // threads =1 (# of core:4)
+	# started thread=4
+
