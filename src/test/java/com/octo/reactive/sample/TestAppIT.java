@@ -21,17 +21,18 @@ import org.junit.experimental.categories.Category;
 public class TestAppIT {
 
     private static final Pattern LINE_HEADER_PATTERN = Pattern.compile("\\Qinfo   : Use reactive audit with \\E.*\\Q at \\E\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
-    private static final String LINE_HEADER_REPLACEMENT = "<<SKIPPED>>";
     private static final Pattern CRLF_PATTERN = Pattern.compile("(\r\n|\n)");
-    private static final String CRLF_REPLACEMENT = "";
+    private static final String CRLF_REPLACEMENT = "\n";
+    private static final Pattern NB_CORES_PATTERN = Pattern.compile("\\Q(# of core:\\E\\d{1,}\\Q)\\E");
+    private static final String SKIPPED_REPLACEMENT = "<<SKIPPED>>";
 
     @Test
-    public void testAuditOutput() throws IOException {
+    public void testConsoleOutput() throws IOException {
         compareFiles("OK-reactiveAuditConsole.log", System.getProperty("consoleOutputFilePath"), System.getProperty("buildDirPath"));
     }
 
     @Test
-    public void testConsoleOutput() throws IOException {
+    public void testAuditOutput() throws IOException {
         compareFiles("OK-audit.log", System.getProperty("auditFilePath"), System.getProperty("buildDirPath"));
     }
 
@@ -62,8 +63,9 @@ System.err.println(outputContent);
     }
 
     private String executePatternReplacements(final String content) throws IOException {
-        final String newContent = content.replaceAll(LINE_HEADER_PATTERN.pattern(), LINE_HEADER_REPLACEMENT);
-        return newContent;
+        final String newContent = content.replaceAll(LINE_HEADER_PATTERN.pattern(), SKIPPED_REPLACEMENT);
+        final String newContentNext = newContent.replaceAll(NB_CORES_PATTERN.pattern(), SKIPPED_REPLACEMENT);
+        return newContentNext;
     }
 
 }
