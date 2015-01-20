@@ -43,9 +43,7 @@ public class TestAppIT {
         Assert.assertTrue(outputFile.exists());
 
         final String expectedContent = preprocess(expectedFile);
-System.err.println(expectedContent);
         final String outputContent = preprocess(outputFile);
-System.err.println(outputContent);
 
         Assert.assertEquals("The files are different!", DigestUtils.sha1Hex(expectedContent), DigestUtils.sha1Hex(outputContent));
     }
