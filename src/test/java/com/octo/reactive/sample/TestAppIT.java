@@ -21,7 +21,7 @@ import org.junit.experimental.categories.Category;
 public class TestAppIT {
 
     private static final Pattern LINE_HEADER_PATTERN = Pattern.compile("(\\Qinfo   : Use reactive audit with \\E.*\\Q at \\E)\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
-    private static final String LINE_HEADER_REPLACEMENT = "$1HH:MM:SS CET YYYY";
+    private static final String LINE_HEADER_REPLACEMENT = "<<SKIPPED>>";
 
     @Test
     public void testAuditOutput() throws IOException {
