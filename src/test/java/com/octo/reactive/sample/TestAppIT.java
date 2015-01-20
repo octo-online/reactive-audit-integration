@@ -20,7 +20,7 @@ import org.junit.experimental.categories.Category;
 @Category(com.octo.reactive.sample.IntegrationTest.class)
 public class TestAppIT {
 
-    private static final Pattern DATE_PATTERN = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}\\Q CET \\E\\d{4}");
+    private static final Pattern DATE_PATTERN = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
     private static final String DATE_REPLACEMENT = "HH:MM:SS CET YYYY";
 
     @Test
