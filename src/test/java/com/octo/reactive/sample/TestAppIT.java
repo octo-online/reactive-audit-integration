@@ -20,8 +20,10 @@ import org.junit.experimental.categories.Category;
 @Category(com.octo.reactive.sample.IntegrationTest.class)
 public class TestAppIT {
 
-    private static final Pattern LINE_HEADER_PATTERN = Pattern.compile("(\\Qinfo   : Use reactive audit with \\E.*\\Q at \\E)\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
+    private static final Pattern LINE_HEADER_PATTERN = Pattern.compile("\\Qinfo   : Use reactive audit with \\E.*\\Q at \\E\\d{2}\\:\\d{2}\\:\\d{2} \\w{3} \\d{4}");
     private static final String LINE_HEADER_REPLACEMENT = "<<SKIPPED>>";
+    private static final Pattern CRLF_PATTERN = Pattern.compile("(\r\n|\n)");
+    private static final String CRLF_REPLACEMENT = "\\n";
 
     @Test
     public void testAuditOutput() throws IOException {
@@ -47,6 +49,17 @@ public class TestAppIT {
 
     private String preprocess(final File file) throws IOException {
         final String content = FileUtils.readFileToString(file);
+        final String newContent = executeSystemPreprocess(content);
+        final String newContentNext = executePatternReplacements(newContent);
+        return newContentNext;
+    }
+
+    private String executeSystemPreprocess(final String content) {
+        final String newContent = content.replaceAll(CRLF_PATTERN.pattern(), CRLF_REPLACEMENT);
+        return newContent;
+    }
+
+    private String executePatternReplacements(final String content) throws IOException {
         final String newContent = content.replaceAll(LINE_HEADER_PATTERN.pattern(), LINE_HEADER_REPLACEMENT);
         return newContent;
     }
